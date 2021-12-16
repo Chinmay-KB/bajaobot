@@ -6,6 +6,7 @@ import { TYPES } from "./types";
 import { Player } from "discord-player";
 import { MessageResponder } from "../services/message_responder";
 import { MessageParser } from "../services/message_parser";
+import { PlayCommand } from "../commands/play";
 
 let container = new Container();
 

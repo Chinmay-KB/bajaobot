@@ -4,5 +4,6 @@ export const TYPES = {
     Token: Symbol("Token"),
     Player: Symbol("Player"),
     MessageResponder: Symbol("MessageResponder"),
-    MessageParser: Symbol("MessageParser")
+    MessageParser: Symbol("MessageParser"),
+    PlayCommand: Symbol("PlayCommand")
 };
