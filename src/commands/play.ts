@@ -25,6 +25,7 @@ export class PlayCommand {
         const tokenised = message.content.split(' ');
         if (tokenised.length >= 3) {
             if (this.play.contains(tokenised)) {
+                // Concatenating all words to form the search query
                 const searchQuery = tokenised.slice(2, tokenised.length).reduce((prev, curr) => { return prev + " " + curr });
                 const _player = container.get<Player>(TYPES.Player);
                 const _res = await _player.search(searchQuery, {
@@ -33,8 +34,9 @@ export class PlayCommand {
 
                 });
 
+
                 if (!_res || !_res.tracks.length) {
-                    return this.messageResponder.sendReply(message, 'No results found');
+                    return this.messageResponder.sendReply(message, `No results found ${message.author}, your taste in music suxx ☢️`);
                 }
 
                 // Using custom extractor to override youtube-dl with play-dl
@@ -54,15 +56,16 @@ export class PlayCommand {
                 }
                 catch {
                     _player.deleteQueue(message.guild!.id);
-                    return this.messageResponder.sendReply(message, 'Can\'t join this voice channel');
+                    return this.messageResponder.sendReply(message, `Can\'t join this voice channel, why is that? ${message.author}`);
                 }
-                await this.messageResponder.sendReply(message, 'Loading the songs');
+                await message.channel.send(`Bajaoing ${_res.playlist ? 'playlist' : 'track'} 🎶🎶`);
                 _res.playlist ? _queue.addTracks(_res.tracks) : _queue.addTrack(_res.tracks[0]);
                 if (!_queue.playing) await _queue.play();
 
             } else {
-                return this.messageResponder.sendReply(message, 'This is NOT a play command');
+                return this.messageResponder.sendReply(message, `Music will play when you give the damn command ${message.author}`);
             }
         }
+        else { this.messageResponder.sendReply(message, `Tumse naa ho paayega ${message.author}`) }
     }
 }
