@@ -26,6 +26,6 @@ container.bind<Player>(TYPES.Player).toConstantValue(new Player(container.get<Cl
 container.bind<string>(TYPES.Token).toConstantValue(process.env.TOKEN!);
 container.bind<MessageResponder>(TYPES.MessageResponder).toConstantValue(new MessageResponder(container.get<Client>(TYPES.Client)));
 container.bind<MessageParser>(TYPES.MessageParser).toConstantValue(new MessageParser(container.get<MessageResponder>(TYPES.MessageResponder)));
-var _playerEvents = new PlayerEvents(container.get<Player>(TYPES.Player), container.get<MessageResponder>(TYPES.MessageResponder));
+var _playerEvents = new PlayerEvents(container.get<Player>(TYPES.Player));
 _playerEvents.events();
 export default container;
