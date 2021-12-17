@@ -7,6 +7,8 @@ export const TYPES = {
     MessageParser: Symbol("MessageParser"),
     PlayCommand: Symbol("PlayCommand"),
     PauseCommand: Symbol("PauseCommand"),
+    ResumeCommand: Symbol("ResumeCommand"),
     PlayerEvents: Symbol("PlayerEvents"),
+
 
 };

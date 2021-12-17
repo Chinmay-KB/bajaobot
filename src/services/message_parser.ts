@@ -3,6 +3,7 @@ import { Message } from "discord.js";
 import { inject, injectable } from "inversify";
 import { PauseCommand } from "../commands/pause";
 import { PlayCommand } from "../commands/play";
+import { ResumeCommand } from "../commands/resume";
 import { Command } from "../util/command";
 import container from "../util/inversify.config";
 import { TYPES } from "../util/types";
@@ -12,6 +13,8 @@ export class MessageParser {
     private messageResponder: MessageResponder;
     private play = new Command('play', 'p');
     private pause = new Command('pause', 'px');
+    private resume = new Command('resume', 'res');
+
     constructor(
         @inject(TYPES.MessageResponder) messageResponder: MessageResponder
     ) {
@@ -30,6 +33,11 @@ export class MessageParser {
                 }
                 else if (this.pause.contains(tokenised)) {
                     new PauseCommand(
+                        container.get<MessageResponder>(TYPES.MessageResponder)
+                    ).execute(message);
+                }
+                else if (this.resume.contains(tokenised)) {
+                    new ResumeCommand(
                         container.get<MessageResponder>(TYPES.MessageResponder)
                     ).execute(message);
                 }
