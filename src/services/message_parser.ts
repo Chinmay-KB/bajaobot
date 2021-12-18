@@ -1,46 +1,18 @@
-import { Player, QueryType } from "discord-player";
 import { Message } from "discord.js";
-import { inject, injectable } from "inversify";
-import { PauseCommand } from "../commands/pause";
-import { PlayCommand } from "../commands/play";
-import { ResumeCommand } from "../commands/resume";
-import { Command } from "../util/command";
-import container from "../util/inversify.config";
-import { TYPES } from "../util/types";
-import { MessageResponder } from "./message_responder";
+import { injectable } from "inversify";
+import { commands } from "../commands/command";
 @injectable()
 export class MessageParser {
-    private messageResponder: MessageResponder;
-    private play = new Command('play', 'p');
-    private pause = new Command('pause', 'px');
-    private resume = new Command('resume', 'res');
-
-    constructor(
-        @inject(TYPES.MessageResponder) messageResponder: MessageResponder
-    ) {
-        this.messageResponder = messageResponder;
-    }
 
     public async parseMessage(message: Message) {
 
         if (message.content.startsWith('--')) {
             const tokenised = message.content.split(' ');
             if (tokenised.length >= 2) {
-                if (this.play.contains(tokenised)) {
-                    new PlayCommand(
-                        container.get<MessageResponder>(TYPES.MessageResponder)
-                    ).execute(message);
-                }
-                else if (this.pause.contains(tokenised)) {
-                    new PauseCommand(
-                        container.get<MessageResponder>(TYPES.MessageResponder)
-                    ).execute(message);
-                }
-                else if (this.resume.contains(tokenised)) {
-                    new ResumeCommand(
-                        container.get<MessageResponder>(TYPES.MessageResponder)
-                    ).execute(message);
-                }
+                commands.forEach((value, key, map) => {
+                    if (value.contains(tokenised))
+                        value.botCommand.execute(message);
+                });
             }
         }
 

@@ -4,7 +4,8 @@
   "description": "A discord bot for the masses, to fight the Youtube hedgemony",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js"
+    "local": "tsc && node dist/index.js",
+    "droplet": "tsc && pm2 start dist/index.js"
   },
   "author": "Chinmay-KB",
   "license": "ISC",

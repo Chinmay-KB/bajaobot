@@ -1,6 +1,5 @@
 import { Player, Queue, Track } from "discord-player";
 import { inject, injectable } from "inversify";
-import { MessageResponder } from "../services/message_responder";
 import { TYPES } from "../util/types";
 
 @injectable()
