@@ -7,6 +7,7 @@ import { PlayCommand } from "./play";
 import { QueueCommand } from "./queue";
 import { ResumeCommand } from "./resume";
 import { SkipCommand } from "./skip";
+import { BackCommand } from "./back";
 
 const commands = new Map<string, Command>([
     ['play', new Command('play', 'p', new PlayCommand, 'Play a song, or if a song is already playing, add it to the queue.')],
@@ -16,7 +17,8 @@ const commands = new Map<string, Command>([
     ['nowPlaying', new Command('now', 'np', new NowPlayingCommand, 'Display info about now playing songs')],
     ['queue', new Command('queue', 'q', new QueueCommand, 'Display the queue')],
     ['skip', new Command('skip', 'sk', new SkipCommand, 'Skip currently playing track')],
-    ['help', new Command('help', 'h', new HelpCommand, 'List all available commands')]
+    ['help', new Command('help', 'h', new HelpCommand, 'List all available commands')],
+    ['bacc', new Command('bacc', 'b', new BackCommand, 'Plays the previous track (if available)')]
 
 ]);
 

@@ -51,7 +51,12 @@ export class PlayCommand extends BotCommand {
             }
             // await message.channel.send(`Bajaoing ${_res.playlist ? 'playlist' : 'track'} 🎶🎶`);
             _res.playlist ? _queue.addTracks(_res.tracks) : _queue.addTrack(_res.tracks[0]);
-            if (!_queue.playing) await _queue.play();
+            try {
+                if (!_queue.playing) await _queue.play();
+            }
+            catch (e) {
+                message.channel.send('Something is amiss');
+            }
 
 
         }
