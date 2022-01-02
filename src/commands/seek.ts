@@ -30,9 +30,6 @@ export class SeekCommand extends BotCommand {
             catch (e) {
                 message.channel.send(`Time entered is not proper`);
             }
-            queue.clear();
-
-            message.channel.send(`The queue is now as useless as \`ueue\` in \`queue\`🗑️`);
         } else {
             message.channel.send(`Wrong usage of this command.`)
         }
